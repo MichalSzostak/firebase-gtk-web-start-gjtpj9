@@ -83,8 +83,15 @@ async function main() {
   // Listen to RSVP button clicks
   startRsvpButton.addEventListener("click",
    () => {
-        ui.start("#firebaseui-auth-container", uiConfig);
+    if (auth.currentUser) {
+      // User is signed in; allows user to sign out
+      signOut(auth);
+    } else {
+      // No user is signed in; allows user to sign in
+      ui.start('#firebaseui-auth-container', uiConfig);
+    }
   });
+  
 
   // Listen to the form submission
   form.addEventListener('submit', async e => {
