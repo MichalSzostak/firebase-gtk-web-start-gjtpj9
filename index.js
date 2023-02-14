@@ -14,8 +14,12 @@ import {
 import {
   getFirestore,
   addDoc,
-  collection
+  collection,
+  query,
+  orderBy,
+  onSnapshot
 } from 'firebase/firestore';
+
 
 
 import * as firebaseui from 'firebaseui';
@@ -123,5 +127,20 @@ async function main() {
     }
   });
 
+  // Create query for messages
+  const q = query(collection(db, 'guestbook'), orderBy('timestamp', 'desc'));
+  onSnapshot(q, snaps => {
+    // Reset page
+    guestbook.innerHTML = '';
+    // Loop through documents in database
+    snaps.forEach(doc => {
+      // Create an HTML entry for each document and add it to the chat
+      const entry = document.createElement('p');
+      entry.textContent = doc.data().name + ': ' + doc.data().text;
+      guestbook.appendChild(entry);
+    });
+  });
+
+  
 }
 main();
