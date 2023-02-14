@@ -37,7 +37,8 @@ async function main() {
     measurementId: "G-2G5B9PJXF5"  
   };
 
-  // initializeApp(firebaseConfig);
+  initializeApp(firebaseConfig);
+  auth = getAuth()
 
   // FirebaseUI config
   const uiConfig = {
