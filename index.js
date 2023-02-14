@@ -4,7 +4,7 @@ import './style.css';
 import { initializeApp } from 'firebase/app';
 
 // Add the Firebase products and methods that you want to use
-import {} from 'firebase/auth';
+import { getAuth, EmailAuthProvider } from 'firebase/auth';
 import {} from 'firebase/firestore';
 
 import * as firebaseui from 'firebaseui';
@@ -27,7 +27,15 @@ let db, auth;
 
 async function main() {
   // Add Firebase project configuration object here
-  const firebaseConfig = {};
+  const firebaseConfig = {
+    apiKey: "AIzaSyC_xBNDRUJyhYCbB7HOjcHZHWzCLDbD1wA",  
+    authDomain: "multiverse-test-cd1a1.firebaseapp.com",  
+    projectId: "multiverse-test-cd1a1",  
+    storageBucket: "multiverse-test-cd1a1.appspot.com",  
+    messagingSenderId: "761157331004",  
+    appId: "1:761157331004:web:5d3ddf3c40b78969c7bb39",  
+    measurementId: "G-2G5B9PJXF5"  
+  };
 
   // initializeApp(firebaseConfig);
 
@@ -47,6 +55,14 @@ async function main() {
     },
   };
 
-  // const ui = new firebaseui.auth.AuthUI(auth);
+  const ui = new firebaseui.auth.AuthUI(auth);
+
+
+  // Listen to RSVP button clicks
+  startRsvpButton.addEventListener("click",
+   () => {
+        ui.start("#firebaseui-auth-container", uiConfig);
+  });
+
 }
 main();
